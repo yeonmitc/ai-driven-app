@@ -8,7 +8,8 @@ async function getPost(postId: string) {
 }
 
 export default async function PostDetail({ params }: IPageProps) {
-  const post = await getPost(params.postId);
+  const resolvedParams = await Promise.resolve(params);
+  const post = await getPost(resolvedParams.postId);
 
   if (!post) {
     return (
