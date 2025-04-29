@@ -3,19 +3,14 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Post } from '../mock/data';
 import { mockComments } from '../mock/data';
-import { Comment } from '../mock/data';
+import { IPost, IComment, IPostCardProps } from '@/types';
 
-interface PostCardProps {
-  post: Post;
-}
-
-export default function PostCard({ post }: PostCardProps) {
+export default function PostCard({ post }: IPostCardProps) {
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likesCount, setLikesCount] = useState(post.likes);
   const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState(mockComments.filter(comment => comment.postId === post.postId));
+  const [comments, setComments] = useState<IComment[]>(mockComments.filter(comment => comment.postId === post.postId));
   const [newComment, setNewComment] = useState('');
 
   const handleLikeClick = () => {
@@ -27,7 +22,7 @@ export default function PostCard({ post }: PostCardProps) {
     e.preventDefault();
     if (!newComment.trim()) return;
 
-    const comment: Comment = {
+    const comment: IComment = {
       id: String(Date.now()),
       postId: post.postId,
       userName: "현재 사용자",

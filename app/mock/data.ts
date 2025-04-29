@@ -1,3 +1,5 @@
+import { IPost, IComment } from '@/types';
+
 export interface Post {
   postId: string;
   imageURL: string;
@@ -19,7 +21,7 @@ export interface Comment {
   userProfile: string;
 }
 
-export const mockPosts: Post[] = [
+export const mockPosts: IPost[] = [
   {
     postId: "1",
     imageURL: "https://picsum.photos/400/400",
@@ -132,7 +134,7 @@ export const mockPosts: Post[] = [
   }
 ];
 
-export const mockComments: Comment[] = [
+export const mockComments: IComment[] = [
   {
     id: "1",
     postId: "1",

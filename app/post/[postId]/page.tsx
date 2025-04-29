@@ -1,18 +1,13 @@
 import { mockPosts } from '../../mock/data';
 import PostDetailClient from './PostDetailClient';
-
-interface PageProps {
-  params: {
-    postId: string;
-  };
-}
+import { IPageProps } from '@/types';
 
 async function getPost(postId: string) {
   // 실제 API 호출로 대체될 수 있는 부분
   return mockPosts.find(p => p.postId === postId);
 }
 
-export default async function PostDetail({ params }: PageProps) {
+export default async function PostDetail({ params }: IPageProps) {
   const post = await getPost(params.postId);
 
   if (!post) {

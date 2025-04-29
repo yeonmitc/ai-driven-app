@@ -3,15 +3,12 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { mockComments, type Post, type Comment } from '../../mock/data';
+import { mockComments } from '../../mock/data';
+import { IPost, IComment, IPostDetailClientProps } from '@/types';
 
-interface PostDetailClientProps {
-  post: Post;
-}
-
-export default function PostDetailClient({ post }: PostDetailClientProps) {
+export default function PostDetailClient({ post }: IPostDetailClientProps) {
   const router = useRouter();
-  const [comments, setComments] = useState<Comment[]>(
+  const [comments, setComments] = useState<IComment[]>(
     mockComments.filter(c => c.postId === post.postId)
   );
   const [isLiked, setIsLiked] = useState(post.isLiked);
@@ -44,7 +41,7 @@ export default function PostDetailClient({ post }: PostDetailClientProps) {
     e.preventDefault();
     if (!newComment.trim()) return;
 
-    const comment: Comment = {
+    const comment: IComment = {
       id: String(Date.now()),
       postId: post.postId,
       userName: "현재 사용자",
